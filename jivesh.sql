@@ -123,6 +123,9 @@ Select ename from emp where ename not like '___e%';
 
 
 --------------------------------------current date
+//Dual: Its a inbuilt table consiting of single column which is used by oracle
+//Sysdate: Current date stored in a built system variable called sysdate
+
 Select  sysdate from dual;
 
 Select  sysdate ,to_char (sysdate,'dd') from dual;
@@ -163,3 +166,111 @@ Select  sysdate ,to_char (sysdate,'ddth') from dual;
 
 Select  sysdate ,to_char (sysdate,'syear') from dual;
 
+
+
+Select sysdate, to_char(sysdate,'d mm yyth yyyysp mi hh dd dy day mon month hh24 ss w' ) from dual;
+Select sysdate, to_char(sysdate,'dd mm yy yyyy d dy day mi ss hh hh24 syear' ) from dual;
+
+Select 4*4+9 from dual;
+Select log(10,10) from dual;
+Select power (3,2) from dual;
+Select abs(-5) from dual;
+
+Alter session set NLS_date_format='ddsp month yyyysp';
+
+------------------------------------------------------------------Date Functions:
+
+1) Add_Months: add months before and after
+
+Select add_months(sysdate,15) from dual;
+select add_months(sysdate,-15) from dual;
+
+
+2) Months_Between : return differnce between two dates in a month ex: retirement of a job
+
+select sysdate-to_date('09-02-2002') from dual;
+
+select months_between(sysdate,to_date('09-02-2002')) from dual;
+
+select 65-months_between(sysdate,to_date('09-02-2002'))/12 from dual;
+
+
+3)last_day: return the date lastday of month
+
+select last_day(sysdate) from dual;
+select last_day(to_date('01-02-1984')) - to_date('26-02-1984') from dual;
+
+
+
+4) next_day: return date 
+select next_day(sysdate,'wed') from dual;
+
+
+------------------------------------------aggregate function
+1) max
+2) min
+3) sum
+4) avg 
+5) count
+6) round
+
+Select round(avg(sal),90) from emp; 
+
+---------------Relational operator(*)
+
+// they are not allowed on null values to check null we use is null or is not null
+
+select * from emp where comm is null;
+
+select * from emp where comm is not null;
+
+Select count(*) , count (comm) from emp; 
+
+// * count all records where as count(comm) doesnot count null values.
+select * from emp;
+
+
+
+---------------------------------------------------------------SEQUENCE :
+
+
+// consist 4 component : start with , increment by , max value/ min value, cycle/no cycle
+// cycle : once sequence reaches the max value it start from starting
+
+
+create sequence rohit
+ start with 1
+ increment by 1
+ maxvalue 10
+nocycle;
+
+select rohit.nextval from dual;
+
+Drop sequence rohit;
+
+
+// pipe symbol : || used to concatenate 
+
+select ename || ' ' || 'soni' from emp
+
+insert into suppl values('s' || rohit.nextval, '&sname', '&status', '&city');
+
+
+select * from suppl
+
+
+// Information about the sequence is in an inbuilt data called user_sequences;
+Select * from user_sequences;
+
+
+create sequence jivesh; // it assumes deafult values
+
+
+create sequence yatin
+ start with 5
+ cycle
+ maxvalue 15
+ minvalue 4
+ cache 2; // specification of cache is important in case of cycle
+
+select yatin.nextval from dual;
