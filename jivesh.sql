@@ -229,7 +229,71 @@ Select count(*) , count (comm) from emp;
 // * count all records where as count(comm) doesnot count null values.
 select * from emp;
 
+--------------------------------------------------------String function
 
+1) length : used to find the lenght of string
+
+Select length(ename), ename from emp;
+
+create table temp(
+Name varchar(10),
+Name1 char(10));
+
+
+insert into temp values('&name' , '&name1');
+a	a         
+ab	ab        
+abc	abc       
+bacde	bacde     
+bbaaccad	bbaaccad  
+
+Select * from temp;
+
+Select length(name), name ,length(name1), name1 from temp; 
+
+
+2) INITCAP: first letter capital
+
+select initcap(ename) from emp;
+select initcap('toady is tuesday') from dual;
+
+
+3) lower/upper
+
+select upper(ename) from emp
+
+4) LTRIM/ RTRIM: 
+
+select name, ltrim(name, 'ab') from temp;       // remove all possible function of ab
+select name1, ltrim(name1, 'ab') from temp;  
+
+select sal, ename, rtrim(sal, 0) from emp;
+
+select name1, rtrim(name1, '') from temp;  
+
+
+5) Padding: add some extra character
+
+select sal, lpad(sal, 10, '*') from emp;
+select sal, rpad(sal, 10, '*') from emp;
+
+select sal, lpad(sal, 10, '*') , rpad(lpad(sal,10, '*'),20,'*')from emp;
+
+6) Decode:
+
+select ename , job, sal , decode (job, 'clerk', 1, 'Salesman', 2, 3) as grade from emp;
+
+select * from emp;
+
+
+7) INSTR : used to find the occurence of specified alphabet in the string
+           first serve first basis
+           
+select ename, INSTR(ename, 'a') from emp;
+
+select ename, INSTR(ename, 'a') from emp where  INSTR(ename, 'a') <> 0;
+
+select ename, INSTR(ename, 'A' ,3) from emp 
 
 ---------------------------------------------------------------SEQUENCE :
 
